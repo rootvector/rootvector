@@ -6,8 +6,8 @@
 
 ## Brief Contents
 
-1.  Getting Started with the Basics
-2.  Text Manipulation
+1.  [Getting Started with the Basics](#1-getting-started-with-the-basics)
+2.  [Text Manipulation](#2-text-manipulation)
 3.  Analyzing and Managing Networks
 4.  Adding and Removing Software
 5.  Controlling File and Directory Permissions
