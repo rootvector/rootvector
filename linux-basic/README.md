@@ -1,19 +1,20 @@
-# Linux Basics For Hackers
-- *By OccupyTheWeb
+# Linux Basics for Hackers
 
-## BRIEF CONTENTS
+*By OccupyTheWeb*
 
----
-**
-1. [Geting Started with the Basics](#geting-started-with-the-basics)
-2. [Text Manipulation](#text-manipulation)
-3. Analyzing and Managing Network
-4. Adding and Removing Software
-5. Controlling File and Directory Permissions
-6. Process Management
-7. Managing User Environment Variables
-8. Bash Scripting
-9. Compressing and Archiving 
+------------------------------------------------------------------------
+
+## Brief Contents
+
+1.  Getting Started with the Basics
+2.  Text Manipulation
+3.  Analyzing and Managing Networks
+4.  Adding and Removing Software
+5.  Controlling File and Directory Permissions
+6.  Process Management
+7.  Managing User Environment Variables
+8.  Bash Scripting
+9.  Compressing and Archiving
 10. Filesystem and Storage Device Management
 11. The Logging System
 12. Using and Abusing Services
@@ -21,168 +22,192 @@
 14. Understanding and Inspecting Wireless Networks
 15. Managing the Linux Kernel and Loadable Kernel Modules
 16. Automating Tasks with Job Scheduling
-17. Python Scripting Basics for Hackers **
+17. Python Scripting Basics for Hackers
 
----
+------------------------------------------------------------------------
 
-## 1. Geting Started with the Basics
+## 1. Getting Started with the Basics
 
-### Basic Commands in Linux
+### Finding Yourself with `pwd`
 
-###*Finding Yourself with pwd*
-
-```bash
+``` bash
 pwd
 ```
 
-###*Checking Your Login with whoami*
-```bash
+**Purpose:** Shows the current working directory.
+
+------------------------------------------------------------------------
+
+### Checking Your Login with `whoami`
+
+``` bash
 whoami
 ```
 
+**Purpose:** Displays the current logged-in user.
+
+------------------------------------------------------------------------
+
 ### Navigating the Linux Filesystem
 
-###*Navigating the Linux Filesystem*
-```bash
+``` bash
 cd /etc
-
 cd ..
-
 cd ../..
 ```
 
-- You would use .. to move up one level.
-- You would use ../.. to move up two levels.
-- You would use ../../.. to move up three levels, and so on.
+-   `..` → Move up one directory
+-   `../..` → Move up two directories
 
-###*Listing the Contents of a Directory with ls*
-```bash
+------------------------------------------------------------------------
+
+### Listing Directory Contents with `ls`
+
+``` bash
 ls
-
-ls -l       # FOR LONG LIST OF FILES AND FOLDERS
-
-ls -la      # LONG LISTING AND HIDDEN FILE AND FOLDER LISTING
-
+ls -l
+ls -la
 ```
 
-###*Getting Help*
-```bash
-aricrack-ng --help
+-   `-l` → Long listing format\
+-   `-a` → Show hidden files
 
+------------------------------------------------------------------------
+
+### Getting Help
+
+``` bash
+aircrack-ng --help
 nmap -h
 ```
 
-*Note the double dash here. The convention in Linux is to use a double
-dash (--) before word options, such as help, and a single dash (-) before
-single-letter options, such as –h.*
+-   `--` is used for full-word options\
+-   `-` is used for single-letter options
 
-###*Referencing Manual Pages with man*
-```bash
+------------------------------------------------------------------------
+
+### Using Manual Pages
+
+``` bash
 man aircrack-ng
 ```
 
-### Finding Stuff
+------------------------------------------------------------------------
 
-###*Searching with locate*
-```bash
+## Finding Files
+
+### Using `locate`
+
+``` bash
 locate aircrack-ng
 ```
 
-*locate
-uses a database that is usually only updated once a day, so if you just created
-a file a few minutes or a few hours ago, it might not appear in this list until
-the next day. It’s worth knowing the disadvantages of these basic commands
-so you can better decide when best to use each one.*
+> Note: `locate` uses a database that may not update instantly.
 
-###*Finding Binaries with whereis*
-```bash
+------------------------------------------------------------------------
+
+### Using `whereis`
+
+``` bash
 whereis aircrack-ng
 ```
-###*Finding Binaries in the PATH Variable with which*
 
-The which command is even more specific: it only returns the location of
-the binaries in the PATH variable in Linux.
+------------------------------------------------------------------------
 
-```bash
+### Using `which`
+
+``` bash
 which aircrack-ng
 ```
-###*Performing More Powerful Searches with find*
 
-*syntax*
+------------------------------------------------------------------------
 
-`find directory options expression`
+### Using `find`
 
-*example*
-```bash
+**Syntax:**
+
+``` bash
+find directory options expression
+```
+
+**Example:**
+
+``` bash
 find / -type f -name apache2
 ```
 
-> A Quic Look At WildCards
+------------------------------------------------------------------------
 
-Let’s say we’re doing a search on a directory that has the files cat, hat, what,
-and bat. The ? wildcard is used to represent a single character, so a search
-for ?at would find hat, cat, and bat but not what, because at in this filename is
-preceded by two letters. The [] wildcard is used to match the characters that
-appear inside the square brackets. For example, a search for [c,b]at would
-match cat and bat but not hat or what. Among the most widely used wildcards
-is the asterisk (*), which matches any character(s) of any length, from none to
-an unlimited number of characters. A search for *at, for example, would find
-cat, hat, what, and bat.
+### Filtering with `grep`
 
-###*Filtering with grep*
-
-```bash
+``` bash
 ps aux | grep apache2
 ```
 
-### Modifying Files and Directories
+------------------------------------------------------------------------
 
-###*Creating Files*
+## Modifying Files and Directories
 
-###*Concatenation with cat*
-```bash
-cat > hackingskills     # Create new file or change existing data or overwrite data of file using > operator
+### Create or Overwrite a File
 
-cat >> hackingskills  # >> sing use for append text in file
+``` bash
+cat > hackingskills
 ```
 
-###*File Creation with touch*
-```bash
+### Append to a File
+
+``` bash
+cat >> hackingskills
+```
+
+### Create a File
+
+``` bash
 touch newfile
 ```
 
-###*Creating a Directory*
-```bash
+### Create a Directory
+
+``` bash
 mkdir newdirectory
 ```
 
-###*Copying a File*
-```bash
-cp oldfile /root/mydir      # oldfile is a source and new file is a destination.
+### Copy a File
+
+``` bash
+cp oldfile /root/mydir
 ```
 
-###*Renaming a File*
+### Rename or Move a File
 
-*syntax*
-```bash
+``` bash
 mv source destination
 ```
 
-###*Removing a File*
-```bash
+### Remove a File
+
+``` bash
 rm filename
 ```
 
-###*Removing a Directory*
-```bash
-rmdir directoryname     # if directory was empty
+### Remove a Directory
 
-rm -r newdirectory      # if directory contain a files in it. -r switch are used.
+``` bash
+rmdir directoryname
+rm -r newdirectory
 ```
 
----
+------------------------------------------------------------------------
 
 ## 2. Text Manipulation
 
+(Add your notes here as you continue learning.)
 
+------------------------------------------------------------------------
 
+## Mission
+
+This repository documents my ethical hacking journey through structured
+notes, commands, and lab observations.
+
+Consistency \> Motivation.
